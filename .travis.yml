@@ -23,6 +23,7 @@ script:
   - popd
 
 after_script:
+  - echo $TRAVIS_PULL_REQUEST
   - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then echo 1; fi'
   - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then exit 0; fi'
   - \cp -rf ${DOCS_ROOT}/_site/* content
