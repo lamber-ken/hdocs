@@ -24,7 +24,7 @@ script:
 
 after_script:
   - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then echo 1; fi'
-  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then exit -1; fi'
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then exit 0; fi'
   - \cp -rf ${DOCS_ROOT}/_site/* content
   - git add -A
   - git commit -am "Travis CI build asf-site"
