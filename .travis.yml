@@ -24,8 +24,8 @@ script:
 
 after_script:
   - echo $TRAVIS_PULL_REQUEST
-  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then echo "ignore push build result for each submit"; fi'
-  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then echo "pushing build result ..."; exit 0; fi'
+  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then echo "ignore push build result for each submit"; exit 0; fi'
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then echo "pushing build result ..."; fi'
   - \cp -rf ${DOCS_ROOT}/_site/* content
   - git add -A
   - git commit -am "Travis CI build asf-site"
