@@ -3,33 +3,29 @@ rvm:
   - 2.6.3
 
 git:
-  clone: false
+  clone: true
 
 env:
   - DOCS_ROOT="`pwd`/hdocs/docs"
 
-before_install:
-  - git config --global user.name ${user}
-  - git config --global user.email ${email}
-  - git clone https://${token}@github.com/lamber-ken/hdocs.git
-  - cd hdocs && git checkout asf-site
-  - gem install bundler:2.0.2
+#before_install:
+#  - git config --global user.name ${user}
+#  - git config --global user.email ${email}
+#  - git clone https://${token}@github.com/lamber-ken/hdocs.git
+#  - cd hdocs && git checkout asf-site
+#  - gem install bundler:2.0.2
 
 script:
-  - pushd ${DOCS_ROOT}
-  - bundle install
-  - bundle update --bundler
-  - bundle exec jekyll build _config.yml --source . --destination _site
-  - popd
+  - ls -l .
 
-after_script:
-  - echo $TRAVIS_PULL_REQUEST
-  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then echo "ignore push build result for each submit"; exit 0; fi'
-  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then echo "pushing build result ..."; fi'
-  - \cp -rf ${DOCS_ROOT}/_site/* content
-  - git add -A
-  - git commit -am "Travis CI build asf-site"
-  - git push origin asf-site
+#after_script:
+#  - echo $TRAVIS_PULL_REQUEST
+#  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then echo "ignore push build result for each submit"; exit 0; fi'
+#  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then echo "pushing build result ..."; fi'
+#  - \cp -rf ${DOCS_ROOT}/_site/* content
+#  - git add -A
+#  - git commit -am "Travis CI build asf-site"
+#  - git push origin asf-site
 
 branches:
   only:
