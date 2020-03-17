@@ -16,7 +16,7 @@ env:
 #  - gem install bundler:2.0.2
 
 script:
-  - ls -l .
+  - cat docs/_includes/nav_list
 
 #after_script:
 #  - echo $TRAVIS_PULL_REQUEST
