@@ -17,6 +17,7 @@ env:
 
 script:
   - cat docs/_includes/nav_list
+  - git remote -v
 
 #after_script:
 #  - echo $TRAVIS_PULL_REQUEST
