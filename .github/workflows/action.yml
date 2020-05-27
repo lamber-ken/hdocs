@@ -1,0 +1,12 @@
+name: Action Test
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  bot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: demo
+        run: echo 123
