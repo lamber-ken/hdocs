@@ -1,0 +1,20 @@
+name: Bot tests
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  bot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Bot actions
+        uses: ./.github/actions/bot
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HUDI_TRAVIS_COM_TOKEN: ${{ secrets.HUDI_TRAVIS_COM_TOKEN }}
+        with:
+          provider: lamber-ken
+          repository: hdocs
+          command: ${{ github.event.comment.body }}
