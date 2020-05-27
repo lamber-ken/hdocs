@@ -24,9 +24,6 @@ import org.junit.Test;
  */
 public class TestClientRollback {
 
-    /**
-     * Test case for rollback-savepoint interaction.
-     */
     @Test
     public void testSavepointAndRollback() throws Exception {
         System.out.println(1 / 0);
