@@ -1,0 +1,21 @@
+name: Bot tests
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  bot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Bot actions
+        uses: ./.github/actions/bot
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          repo_owner: lamber-ken
+          repo_name: hdocs
+          rerun_cmd: rerun failure checks
+          comment: ${{ github.event.comment.body }}
+          comments: ${{ github.event.comment.body }}
