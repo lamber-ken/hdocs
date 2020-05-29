@@ -36,9 +36,26 @@ jobs:
         env:
           T_1: ${{ toJson(github) }}
         run: echo "$T_1"
-
-
-
+      - name: test2
+        env:
+          T_2: ${{ toJson(job) }}
+        run: echo "$T_2"
+      - name: test3
+        env:
+          T_3: ${{ toJson(steps) }}
+        run: echo "$T_3"
+      - name: test4
+        env:
+          T_4: ${{ toJson(env) }}
+        run: echo "$T_4"
+      - name: test5
+        env:
+          T_5: ${{ toJson(runner) }}
+        run: echo "$T_5"
+      - name: test6
+        env:
+          T_6: ${{ toJson(needs) }}
+        run: echo "$T_6"
 
 
 
