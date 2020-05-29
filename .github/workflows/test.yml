@@ -1,4 +1,8 @@
-on: push
+name: AAAA
+
+on:
+  issue_comment:
+    types: [created]
 
 jobs:
   one:
