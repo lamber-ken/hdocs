@@ -17,9 +17,3 @@ jobs:
           repo_name: hudi
           rerun_cmd: rerun failure checks
           comment: ${{ github.event.comment.body }}
-
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: demo
-        run: echo 123
