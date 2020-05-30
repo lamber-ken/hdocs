@@ -6,7 +6,7 @@ public class TestClientRollback {
     @Test
     public void testSavepointAndRollback() throws Exception {
 
-        // test 1111fff
+        // test 11112
 
         Thread.sleep(30000);
 

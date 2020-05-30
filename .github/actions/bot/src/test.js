@@ -81,6 +81,7 @@ async function run() {
                 // github.checks.
 
                 try {
+
                     github.checks.rerequestSuite({
                         owner: owner,
                         repo: repo,
@@ -98,6 +99,63 @@ async function run() {
 
             }
         });
+
+
+
+
+
+
+
+
+
+
+
+
+        const data1 = await github.checks.listForRef({
+            owner,
+            repo,
+            ref: prRef,
+            status: "completed"
+        });
+
+        console.log("listForRef")
+        data1.data.check_runs.forEach(job => {
+            console.log(job)
+        });
+
+
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+
+        const data2 = await github.checks.listSuitesForRef({
+            owner,
+            repo,
+            ref: prRef,
+            status: "completed"
+        });
+        console.log("check_suites")
+        data2.data.check_suites.forEach(job => {
+            console.log(job)
+        });
+
+
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+
+
+
+
+
+
+
+
+
     } catch (e) {
 
         console.log("")
