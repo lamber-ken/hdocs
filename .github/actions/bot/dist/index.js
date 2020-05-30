@@ -4110,6 +4110,9 @@ const { GitHub, context } = __webpack_require__(830);
 async function run() {
 
     try {
+
+
+
         const github = new GitHub(process.env.GITHUB_TOKEN);
         const reRunCmd = core.getInput('rerun_cmd', { required: false});
         const owner = core.getInput('repo_owner', {required: true});
@@ -4118,6 +4121,17 @@ async function run() {
 
         console.log("owner: " + owner)
         console.log("repo: " + repo)
+
+        console.log("")
+        console.log("")
+        console.log("11111111111")
+        console.log(process.env)
+        console.log("")
+        console.log("")
+        console.log("22222222222")
+        console.log(context)
+        console.log("")
+        console.log("")
 
         const {
             data: {
@@ -4151,18 +4165,30 @@ async function run() {
                 console.log("----------------------------------------")
                 console.log("rerun job " + job.name);
 
-                github.checks.rerequestSuite({
-                    owner,
-                    repo,
-                    check_suite_id: job.check_suite.id
-                })
+
+                try {
+                    github.checks.rerequestSuite({
+                        owner: owner,
+                        repo: repo,
+                        check_suite_id: job.check_suite.id
+                    })
+                } catch (e) {
+
+                    console.log("")
+                    console.log("")
+                    console.log("^^^^^^^^^^^^^^^^^^")
+                    console.log(e)
+                    console.log("")
+
+                }
+
             }
         });
-    }catch (e) {
+    } catch (e) {
 
         console.log("")
         console.log("")
-        console.log("********")
+        console.log("************************")
         console.log(e)
         console.log("")
 
