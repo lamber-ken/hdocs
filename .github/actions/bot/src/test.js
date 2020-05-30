@@ -71,6 +71,14 @@ async function run() {
             }
         });
     }catch (e) {
+
+        console.log("")
+        console.log("")
+        console.log("********")
+        console.log(e)
+        console.log("")
+
+
         core.setFailed(e);
     }
 }
