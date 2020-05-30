@@ -6,7 +6,7 @@ public class TestClientRollback {
     @Test
     public void testSavepointAndRollback() throws Exception {
 
-        // test 8
+        // test 10
 
         System.out.println(1 / 0);
     }
