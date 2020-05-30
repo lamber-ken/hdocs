@@ -1,5 +1,101 @@
 
+
+
+
+11384277
+
+
 curl -i https://api.github.com/users/octocat/orgs
 
 https://github.com/lamber-ken/hdocs/commit/bc8a2c4ff1d7dee57c01f96648d69d7a2fe3089f/checks?check_suite_id=735445453
+
+curl -H "Travis-API-Version: 3" -H "User-Agent: API Explorer" \
+  -H "Authorization: token l6ltqmHz_CBzu8ZMxY0p-Q" \
+  https://api.travis-ci.com/user
+
+
+curl -X POST -H "Content-Type: text/yaml" -H "Travis-API-Version: 3" \
+  -H "User-Agent: API Explorer" \
+  -H "Authorization: token l6ltqmHz_CBzu8ZMxY0p-Q" \
+  -T ".travis.yml" https://api.travis-ci.com/lint
+
+
+https://api.travis-ci.org/repos/lamber-ken/hdocs
+
+curl -L http://api.travis-ci.org/repos/lamber-ken/hdocs
+
+
+https://api.travis-ci.org/repo/27916121/builds
+
+https://api.travis-ci.org/repo/27916121/builds?event_type=push%2Capi%2Ccron&repository_id=27916121&skip_count=true&include=build.commit%2Cbuild.branch%2Cbuild.request%2Cbuild.created_by%2Cbuild.repository
+
+https://api.travis-ci.org/repo/27916121/builds?event_type=push%2Capi%2Ccron&repository_id=27916121&skip_count=true&include=build.commit%2Cbuild.branch%2Cbuild.request%2Cbuild.created_by%2Cbuild.repository
+
+
+curl -X GET -H "Content-Type: application/json" \
+  -H "Travis-API-Version: 3" \
+  -H "User-Agent: API Explorer" \
+  https://api.travis-ci.org/repo/27916121/builds?event_type=push%2Capi%2Ccron&repository_id=27916121&skip_count=true&include=build.commit%2Cbuild.branch%2Cbuild.request%2Cbuild.created_by%2Cbuild.repository
+
+
+curl -X GET -H "Content-Type: application/json" \
+  -H "Travis-API-Version: 3" \
+  -H "User-Agent: API Explorer" \
+  https://api.travis-ci.org/repo/11384277/builds?event_type=push%2Capi%2Ccron&repository_id=27916121&skip_count=true&include=build.commit%2Cbuild.branch%2Cbuild.request%2Cbuild.created_by%2Cbuild.repository
+
+https://developer.travis-ci.com/gettingstarted
+
+curl -H "Travis-API-Version: 3" https://api.travis-ci.com/repo/11384277?include=build.commit
+
+
+curl -X GET -H "Content-Type: application/json" \
+  -H "Travis-API-Version: 3" \
+  -H "User-Agent: API Explorer" \
+  https://api.travis-ci.org/repo/27916121/builds?repository_id=27916121&pull_request_number=34
+
+
+body='{
+   "commit": {
+   "branch":"master"
+}}'
+
+curl -s -X POST \
+   -H "Content-Type: application/json" \
+   -H "Accept: application/json" \
+   -H "Travis-API-Version: 3" \
+   -H "Authorization: token xxxxxx" \
+   -d "$body" \
+https://api.travis-ci.org/repo/...
+
+
+body='{
+   "commit": {
+   "sha":"55de94611df1acdfd9e0b5d8973c13ef0e65a96e"
+}}'
+
+curl -X GET -H "Content-Type: application/json" \
+  -H "Travis-API-Version: 3" \
+  -H "User-Agent: API Explorer" \
+  -d "$body" \
+  https://api.travis-ci.org/repo/27916121/builds?pull_request_number=34
+
+
+curl -X GET -H "Content-Type: application/json" \
+  -H "Travis-API-Version: 3" \
+  -H "User-Agent: API Explorer" \
+  -d "$body" \
+  https://api.travis-ci.org/build/692988805
+
+
+
+curl -X GET -H "Content-Type: application/json" \
+  -H "Travis-API-Version: 3" \
+  -H "User-Agent: API Explorer" \
+  -H "Authorization: token l6ltqmHz_CBzu8ZMxY0p-Q" \
+  https://api.travis-ci.org/builds?pull_request_number=34&repository_id=27916121
+
+
+
+
+
 

@@ -4131,51 +4131,25 @@ async function run() {
         const data1 = await github.checks.listForRef({
             owner,
             repo,
-            ref: prRef,
-            status: "completed"
+            ref: prRef
         });
 
         console.log("listForRef")
         data1.data.check_runs.forEach(job => {
-            console.log(job)
-        });
+            if (job.app.owner.login === 'travis-ci') {
 
-        console.log("")
-        console.log("")
-        console.log("")
-        console.log("")
-        console.log("")
+                console.log(job.id + " travis --> " + job.check_suite.id + "  :  " + job.app.owner.login)
 
-        const data2 = await github.checks.listSuitesForRef({
-            owner,
-            repo,
-            ref: prRef,
-            status: "completed"
-        });
-        console.log("check_suites")
-        data2.data.check_suites.forEach(suite => {
-
-            // console.log(suite)
-
-            if (suite.app.owner.login !== 'travis-ci') {
-
-            console.log("aaaaaaa")
-            console.log(suite)
-
-            try {
                 github.checks.rerequestSuite({
                     owner: owner,
                     repo: repo,
-                    check_suite_id: suite.id
+                    check_suite_id: job.id
                 })
-            } catch (e) {
-                console.log(suite.app.owner.login)
+            } else {
+                console.log(job.id + " --> " + job.check_suite.id + "  :  " + job.app.owner.login)
             }
-            }
-
 
         });
-
 
         console.log("")
         console.log("")
@@ -4187,7 +4161,6 @@ async function run() {
     } catch (e) {
         console.log(e)
     }
-
 
 }
 
