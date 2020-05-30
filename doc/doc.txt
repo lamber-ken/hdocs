@@ -1,5 +1,0 @@
-
-curl -i https://api.github.com/users/octocat/orgs
-
-https://github.com/lamber-ken/hdocs/commit/bc8a2c4ff1d7dee57c01f96648d69d7a2fe3089f/checks?check_suite_id=735445453
-

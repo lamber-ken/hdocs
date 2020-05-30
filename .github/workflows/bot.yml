@@ -13,8 +13,8 @@ jobs:
         uses: ./.github/actions/bot
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HUDI_TRAVIS_COM_TOKEN: ${{ secrets.HUDI_TRAVIS_COM_TOKEN }}
         with:
-          repo_owner: lamber-ken
-          repo_name: hdocs
-          rerun_cmd: rerun failure checks
+          provider: lamber-ken
+          repository: hdocs
           command: ${{ github.event.comment.body }}

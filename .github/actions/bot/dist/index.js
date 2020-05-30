@@ -4110,89 +4110,87 @@ const {GitHub, context} = __webpack_require__(830);
 async function run() {
 
     try {
+
         const github = new GitHub(process.env.GITHUB_TOKEN);
-        const reRunCmd = core.getInput('rerun_cmd', {required: false});
-        const owner = core.getInput('repo_owner', {required: true});
-        const repo = core.getInput('repo_name', {required: true});
-        const comment = core.getInput('command', {required: true});
+        const provider = core.getInput('provider', {required: true});
+        const repository = core.getInput('repository', {required: true});
+        const command = core.getInput('command', {required: true});
+
+        if (command !== 'rerun tests') {
+            console.log("Invalid command:" + command);
+            return;
+        }
 
         const {
             data: {
                 head: {
-                    sha: prRef,
+                    sha: ref,
                 }
             }
         } = await github.pulls.get({
-            owner,
-            repo,
+            owner: provider,
+            repo: repository,
             pull_number: context.issue.number,
         });
 
-        const data1 = await github.checks.listForRef({
-            owner,
-            repo,
-            ref: prRef,
-            status: "completed"
+        const checks = await github.checks.listForRef({
+            owner: provider,
+            repo: repository,
+            ref: ref
         });
 
-        console.log("listForRef")
-        data1.data.check_runs.forEach(job => {
-            console.log(job)
-        });
+        checks.data.check_runs.forEach(check => {
 
-        console.log("")
-        console.log("")
-        console.log("")
-        console.log("")
-        console.log("")
-
-        const data2 = await github.checks.listSuitesForRef({
-            owner,
-            repo,
-            ref: prRef,
-            status: "completed"
-        });
-        console.log("check_suites")
-        data2.data.check_suites.forEach(suite => {
-
-            // console.log(suite)
-
-            if (suite.app.owner.login !== 'travis-ci') {
-
-            console.log("aaaaaaa")
-            console.log(suite)
-
-            try {
-                github.checks.rerequestSuite({
-                    owner: owner,
-                    repo: repo,
-                    check_suite_id: suite.id
-                })
-            } catch (e) {
-                console.log(suite.app.owner.login)
-            }
+            if (check.app.owner.login === 'travis-ci') {
+                console.log("rerun travis ci check")
+                rebuild(check.external_id)
+            } else {
+                console.log("ignore github action check")
             }
 
-
         });
-
-
-        console.log("")
-        console.log("")
-        console.log("")
-        console.log("")
-        console.log("")
 
 
     } catch (e) {
         console.log(e)
     }
 
+}
 
+function rebuild(buildId) {
+    const https = __webpack_require__(211);
+    const token = process.env.HUDI_TRAVIS_COM_TOKEN
+
+    const options = {
+        hostname: 'api.travis-ci.com',
+        port: 443,
+        path: `/build/${buildId}/restart`,
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Travis-API-Version': 3,
+            'Authorization': `token ${token}`,
+        }
+    };
+
+    const req = https.request(options, function (res) {
+        res.setEncoding('utf8');
+        res.on('data', function (chunk) {
+            console.log('BODY: ' + chunk);
+        });
+        res.on('error', function (error) {
+            console.log('ERROR: ' + error);
+        });
+    });
+
+    req.on('error', function (e) {
+        console.log('problem with request: ' + e.message);
+    });
+
+    req.end();
 }
 
 module.exports = run;
-
 
 /***/ }),
 

@@ -21,16 +21,12 @@ name: 'GitHub Action Commands'
 description: 'GitHub Action Commands'
 author: 'lamber-ken'
 inputs:
-  repo_owner:
+  provider:
     description: 'The owner of the repository.'
     required: true
-  repo_name:
+  repository:
     description: 'The name of the repository.'
     required: true
-  rerun_cmd:
-    description: 'The commands string to rerun all failure checks.'
-    required: false
-    default: 'run failure checks'
   command:
     description: 'The comments string of the PR.'
     required: true
