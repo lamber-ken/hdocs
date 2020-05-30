@@ -63,18 +63,30 @@ async function run() {
                 console.log("----------------------------------------")
                 console.log("rerun job " + job.name);
 
-                github.checks.rerequestSuite({
-                    owner: owner,
-                    repo: repo,
-                    check_suite_id: job.check_suite.id
-                })
+
+                try {
+                    github.checks.rerequestSuite({
+                        owner: owner,
+                        repo: repo,
+                        check_suite_id: job.check_suite.id
+                    })
+                } catch (e) {
+
+                    console.log("")
+                    console.log("")
+                    console.log("^^^^^^^^^^^^^^^^^^")
+                    console.log(e)
+                    console.log("")
+
+                }
+
             }
         });
-    }catch (e) {
+    } catch (e) {
 
         console.log("")
         console.log("")
-        console.log("********")
+        console.log("************************")
         console.log(e)
         console.log("")
 
