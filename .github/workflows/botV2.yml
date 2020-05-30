@@ -17,7 +17,7 @@ jobs:
         with:
           script: |
             const path = require('path')
-            const scriptPath = path.resolve('./.github/actions/bot2/test.js')
+            const scriptPath = path.resolve('.github/actions/bot2/test.js')
             require(scriptPath)({context})
           repo_owner: lamber-ken
           repo_name: hdocs
