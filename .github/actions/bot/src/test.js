@@ -78,6 +78,8 @@ async function run() {
                 console.log("rerun job " + job.name);
 
 
+                // github.checks.
+
                 try {
                     github.checks.rerequestSuite({
                         owner: owner,
