@@ -17,13 +17,13 @@
  */
 
 const core = require('@actions/core');
-const { GitHub, context } = require('@actions/github');
+const {GitHub, context} = require('@actions/github');
 
 async function run() {
 
     try {
         const github = new GitHub(process.env.GITHUB_TOKEN);
-        const reRunCmd = core.getInput('rerun_cmd', { required: false});
+        const reRunCmd = core.getInput('rerun_cmd', {required: false});
         const owner = core.getInput('repo_owner', {required: true});
         const repo = core.getInput('repo_name', {required: true});
         const comment = core.getInput('command', {required: true});
@@ -69,17 +69,21 @@ async function run() {
 
             // console.log(suite)
 
-            if (suite.app.owner.login === 'travis-ci') {
+            // if (suite.app.owner.login === 'travis-ci') {
 
-                console.log("aaaaaaa")
-                console.log(suite)
+            console.log("aaaaaaa")
+            console.log(suite)
 
+            try {
                 github.checks.rerequestSuite({
                     owner: owner,
                     repo: repo,
                     check_suite_id: suite.id
                 })
+            } catch (e) {
+                console.log(suite.app.owner.login)
             }
+            // }
 
 
         });
@@ -95,7 +99,6 @@ async function run() {
     } catch (e) {
         console.log(e)
     }
-
 
 
 }
