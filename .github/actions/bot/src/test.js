@@ -22,6 +22,18 @@ const { GitHub, context } = require('@actions/github');
 async function run() {
 
     try {
+
+        console.log("")
+        console.log("")
+        console.log("11111111111")
+        console.log(process.env)
+        console.log("")
+        console.log("")
+        console.log("22222222222")
+        console.log(context)
+        console.log("")
+        console.log("")
+
         const github = new GitHub(process.env.GITHUB_TOKEN);
         const reRunCmd = core.getInput('rerun_cmd', { required: false});
         const owner = core.getInput('repo_owner', {required: true});
