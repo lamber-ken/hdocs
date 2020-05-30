@@ -1,8 +1,7 @@
 {
   "name": "bot",
   "version": "1.0.0",
-  "description": "A bot for doing some Github Actions opeartors",
-  "main": "dist/index.js",
+  "main": "src/main.js",
   "scripts": {
     "lint": "eslint 'src/**.js' 'tests/**.js' --fix",
     "test": "eslint 'src/**.js' 'tests/**.js' && jest --coverage",
