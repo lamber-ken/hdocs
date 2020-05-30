@@ -69,7 +69,7 @@ async function run() {
 
             // console.log(suite)
 
-            // if (suite.app.owner.login === 'travis-ci') {
+            if (suite.app.owner.login !== 'travis-ci') {
 
             console.log("aaaaaaa")
             console.log(suite)
@@ -83,7 +83,7 @@ async function run() {
             } catch (e) {
                 console.log(suite.app.owner.login)
             }
-            // }
+            }
 
 
         });

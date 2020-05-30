@@ -4105,13 +4105,13 @@ function getPreviousPage (octokit, link, headers) {
  */
 
 const core = __webpack_require__(896);
-const { GitHub, context } = __webpack_require__(830);
+const {GitHub, context} = __webpack_require__(830);
 
 async function run() {
 
     try {
         const github = new GitHub(process.env.GITHUB_TOKEN);
-        const reRunCmd = core.getInput('rerun_cmd', { required: false});
+        const reRunCmd = core.getInput('rerun_cmd', {required: false});
         const owner = core.getInput('repo_owner', {required: true});
         const repo = core.getInput('repo_name', {required: true});
         const comment = core.getInput('command', {required: true});
@@ -4157,16 +4157,20 @@ async function run() {
 
             // console.log(suite)
 
-            if (suite.app.owner.login === 'travis-ci') {
+            if (suite.app.owner.login !== 'travis-ci') {
 
-                console.log("aaaaaaa")
-                console.log(suite)
+            console.log("aaaaaaa")
+            console.log(suite)
 
+            try {
                 github.checks.rerequestSuite({
                     owner: owner,
                     repo: repo,
                     check_suite_id: suite.id
                 })
+            } catch (e) {
+                console.log(suite.app.owner.login)
+            }
             }
 
 
@@ -4183,7 +4187,6 @@ async function run() {
     } catch (e) {
         console.log(e)
     }
-
 
 
 }
