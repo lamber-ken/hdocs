@@ -1,0 +1,25 @@
+name: Bot tests
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  bot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run client tests
+        run: ls -al
+
+      - uses: actions/github-script@v1
+        with:
+          script: |
+            const path = require('path')
+            const scriptPath = path.resolve('./.github/actions/bot2/test.js')
+            require(scriptPath)({context})
+          repo_owner: lamber-ken
+          repo_name: hdocs
+          rerun_cmd: rerun failure checks
+          command: ${{ github.event.comment.body }}
