@@ -23,6 +23,17 @@ async function run() {
 
     try {
 
+
+
+        const github = new GitHub(process.env.GITHUB_TOKEN);
+        const reRunCmd = core.getInput('rerun_cmd', { required: false});
+        const owner = core.getInput('repo_owner', {required: true});
+        const repo = core.getInput('repo_name', {required: true});
+        const comment = core.getInput('command', {required: true});
+
+        console.log("owner: " + owner)
+        console.log("repo: " + repo)
+
         console.log("")
         console.log("")
         console.log("11111111111")
@@ -33,15 +44,6 @@ async function run() {
         console.log(context)
         console.log("")
         console.log("")
-
-        const github = new GitHub(process.env.GITHUB_TOKEN);
-        const reRunCmd = core.getInput('rerun_cmd', { required: false});
-        const owner = core.getInput('repo_owner', {required: true});
-        const repo = core.getInput('repo_name', {required: true});
-        const comment = core.getInput('command', {required: true});
-
-        console.log("owner: " + owner)
-        console.log("repo: " + repo)
 
         const {
             data: {
