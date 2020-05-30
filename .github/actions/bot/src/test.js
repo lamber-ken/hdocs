@@ -54,8 +54,13 @@ async function run() {
             if (job.conclusion === 'failure' || job.conclusion === 'cancelled') {
 
                 console.log("")
-                console.log("--------")
+                console.log("")
+                console.log("")
+                console.log("")
+                console.log("----------------------------------------")
                 console.log(job)
+                console.log("")
+                console.log("----------------------------------------")
                 console.log("rerun job " + job.name);
 
                 github.checks.rerequestSuite({
