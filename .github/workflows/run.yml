@@ -1,0 +1,20 @@
+name: bot tests
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  echo-input:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/github-script@v1
+        env:
+          PROVIDER : 'lamber-ken'
+          REPOSITORY: 'hdocs'
+          HUDI_TRAVIS_COM_TOKEN: ${{ secrets.HUDI_TRAVIS_COM_TOKEN }}
+        with:
+          script: |
+            const path = require('path')
+            const scriptPath = path.resolve('.github/actions/run/src/run.js')
+            require(scriptPath)({core}, {context}, {github})

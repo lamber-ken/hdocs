@@ -16,17 +16,14 @@
  * limitations under the License.
  */
 
-const core = require('@actions/core');
-const {GitHub, context} = require('@actions/github');
 
-async function run() {
+async function run(core, context, github) {
 
     try {
 
-        const github = new GitHub(process.env.GITHUB_TOKEN);
-        const provider = core.getInput('provider', {required: true});
-        const repository = core.getInput('repository', {required: true});
-        const command = core.getInput('command', {required: true});
+        const provider = process.env.PROVIDER;
+        const repository = process.env.REPOSITORY;
+        const command = context.payload.comment.body;
 
         if (command !== 'rerun tests') {
             console.log("Invalid command:" + command);
@@ -102,4 +99,6 @@ function rebuild(buildId) {
     req.end();
 }
 
-module.exports = run;
+module.exports = ({core}, {context}, {github}) => {
+    return run(core, context, github);
+}
