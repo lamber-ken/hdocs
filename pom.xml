@@ -28,7 +28,6 @@
 
     <packaging>jar</packaging>
 
-
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
